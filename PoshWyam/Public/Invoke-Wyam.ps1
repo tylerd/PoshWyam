@@ -255,7 +255,7 @@ function Invoke-Wyam {
         if (-not $root -or -not (Test-Path $root)) {
             $root = Join-Path $ModuleRoot 'Wyam'
         }
-        $wyam = Get-ChildItem -Path $root -Include wyam.exe -Recurse | Select-Object -First 1
+        $wyam = Get-ChildItem -Path $root -Include wyam.dll -Recurse | Select-Object -First 1
         $wyam = Resolve-Path $wyam
         Write-Verbose "Invoke-Wyam: Tool located at '$wyam'"
         $Arguments = ($Arguments | Quote) -join ' '
@@ -266,7 +266,7 @@ function Invoke-Wyam {
             Install-Wyam -Root $root
         }
 
-        $expr = "&`"$wyam`" $Arguments"
+        $expr = "&`"dotnet`" `"$wyam`" $Arguments"
         Write-Verbose "Invoke-Wyam: Running command '$expr'"
         Invoke-Expression $expr
     }

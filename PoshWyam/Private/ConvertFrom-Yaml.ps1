@@ -9,9 +9,9 @@ function ConvertFrom-Yaml {
         if ($Yaml) {
             $stringReader = New-Object System.IO.StringReader($Yaml)
             try {
-                $deserializer = [YamlDotNet.Serialization.Deserializer]::new()
+                $deserializer = [YamlDotNet.Serialization.DeserializerBuilder]::new().Build()
                 $yamlObject = $deserializer.Deserialize($stringReader);
-                $serializer = [YamlDotNet.Serialization.Serializer]::new('JsonCompatible')
+                $serializer = [YamlDotNet.Serialization.SerializerBuilder]::new().JsonCompatible().Build()
                 $stringBuilder = [System.Text.StringBuilder]::new()
                 $stringWriter = [System.IO.StringWriter]::new($stringBuilder)
                 $serializer.Serialize($stringWriter, $yamlObject)
