@@ -17,6 +17,9 @@ function New-BlogPost {
         [string[]]
         $Tag = @(),
 
+        [switch]
+        $IncludeDateInFileName,
+
         # The Wyam project root.
         $Root = (Get-WyamRoot),
 
@@ -36,10 +39,13 @@ function New-BlogPost {
         }
         $posts = Get-BlogPostsLocation @parms
 
-        $dateString = (Get-Date).ToString("yyyy-MM-dd")
         $fileName = Get-FileName -Title $Title -Extension ".md"
+
+        if($IncludeDateInFileName){
+            $fileName = "$((Get-Date).ToString("yyyy-MM-dd"))-$fileName"
+        }
         # Get path to post to create
-        $path = Join-Path $posts "$dateString-$fileName"
+        $path = Join-Path $posts $fileName
 
         # Create post
         $content = @"
