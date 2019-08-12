@@ -11,7 +11,7 @@ function New-BlogPost {
         [Parameter(Position=0, Mandatory=$True)]
         [string]
         $Title,
-        
+
         # The tags to include in the blog post.
         [Parameter(Position=1, Mandatory=$False)]
         [string[]]
@@ -24,10 +24,10 @@ function New-BlogPost {
         [switch]
         $Draft
     )
-    
+
     begin {
     }
-    
+
     process {
         # Get directory
         $parms = @{ 'Root' = $Root }
@@ -36,8 +36,10 @@ function New-BlogPost {
         }
         $posts = Get-BlogPostsLocation @parms
 
+        $dateString = (Get-Date).ToString("yyyy-MM-dd")
+        $fileName = Get-FileName -Title $Title -Extension ".md"
         # Get path to post to create
-        $path = Join-Path $posts (Get-BlogPostName $Title)
+        $path = Join-Path $posts "$dateString-$fileName"
 
         # Create post
         $content = @"
@@ -52,7 +54,7 @@ Tags: [$(($Tag | ForEach-Object { """$_""" }) -join ', ')]
         Set-Content -Path $path -Value $content
         Resolve-Path $path
     }
-    
+
     end {
     }
 }
