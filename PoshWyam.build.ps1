@@ -52,9 +52,7 @@ Task RunTests InstallDependencies, Stage, {
 
     }
 
-    $testResults = Invoke-Pester @invokePesterParams
-
-    $testResults | ConvertTo-Json -Depth 5 | Set-Content (Join-Path $Artifacts 'PesterResults.json')
+    Invoke-Pester -OutputFile (Join-Path $Artifacts 'PesterResults.xml')
 }
 
 Task ConfirmTestsPassed {
