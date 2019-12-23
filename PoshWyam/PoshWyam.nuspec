@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package >
+  <metadata>
+    <id>PoshWyam</id>
+    <version>0.1.0</version>
+    <authors>Wyam Contributors</authors>
+    <owners>tylerd</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <license type="expression">MIT</license>
+    <projectUrl>https://github.com/Wyamio/PoshWyam</projectUrl>
+    <description>PowerShell cmdlets for working with Wyam, a static content generator.</description>
+    <copyright>(c) 2017 Wyam Contributors. All rights reserved.</copyright>
+    <tags>Generator HTML Wyam</tags>
+  </metadata>
+</package>
